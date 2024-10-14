@@ -14,10 +14,13 @@ maxnums(A, B, B) :- A < B.
 % maxnums(1, 1, MAX). -> MAX = 1 
 
 
+
+
 % ------------------------------------------------
 % #2 (Undergraduate/Graduate) (5/5 pts)
 % Determine the summation of a list of integer numbers
 % sum(LST, SUM).
+% sum of empty list is 0
 sum([], 0).
 sum([H|T], SUM) :- sum(T, TailSum), SUM is H + TailSum.
 
@@ -28,6 +31,8 @@ sum([H|T], SUM) :- sum(T, TailSum), SUM is H + TailSum.
 % sum([], SUM). -> SUM = 0
 
 
+
+
 % ------------------------------------------------
 % #3 (Undergraduate/Graduate) (5/5 pts)
 % Determine the Maximum of list of integer numbers
@@ -35,8 +40,10 @@ sum([H|T], SUM) :- sum(T, TailSum), SUM is H + TailSum.
 %    as part of your solution.
 % ** You can always assume that the given LST is not empty. 
 % max(LST, MAX).
+
+% max of one element is that element
 max([Num], Num).
-max([], []). & adding a case for empty list, since there is not a max for it
+max([], []). % adding a case for empty list, since there is not a max for it
 max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX). 
 
 
@@ -44,6 +51,9 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % max([-5, -5, -5], MAX). -> MAX = -5
 % max([1], MAX). -> MAX = 1
 % max([413, 0, 977], MAX). -> MAX = 977
+
+
+
 
 
 % ------------------------------------------------
@@ -55,22 +65,41 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % ** You can always assume that the given LST is not empty. 
 % partitionable(LST).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 % partitionable([1, 2, 3, 4, 10]). -> true. because [10, 10]
 % partitionable([2, 1, 1]). -> true. because [2, 2]
 % partitionable([0]). -> true.
 % partitionable([1, 4, 8]). -> false.
 % partitionable([3, 2]). -> false.
+
+
+
+
+
 % ------------------------------------------------
 % #5 (Undergraduate/Graduate) (5/5 pts)
 % Determine whether the given integer number does exist in the given 
 % list of integer numbers
 % elementExist(E, LST).
 
+% element does not exist in empty list
+elementExist(_, []) :- false.
+% If it is the head of the list, it exists. Acts as a base case
+elementExist(E, [E|_]).
+% If head is not the element, then check the tail
+elementExist(E, [_|T]) :- elementExist(E, T).
+
+
 
 % elementExist(1, [1, 2, 3]). -> true.
 % elementExist(1, []). -> false.
 % elementExist(-10, [-34, -56, 2]). -> false.
+
+
+
+
+
 % ------------------------------------------------
 % #6 (Undergraduate/Graduate) (5/5 pts)
 % Determine the reverse list of integer numbers
@@ -90,6 +119,12 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % collectOneDigits([10, 90, -20], NEWLST). -> NEWLST = []
 % collectOneDigits([], NEWLST). -> NEWLST = []
 % collectOneDigits([10, 90, -20, 5, -6], NEWLST). -> NEWLST = [5, -6]
+
+
+
+
+
+
 % ------------------------------------------------
 % #8 (Undergraduate/Graduate) (5/5 pts)
 % Consult the 'zipcodes.pl' file, and study it.
@@ -127,6 +162,12 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % State = 'WI'
 % 
 % getStateInfo(_, 'OH', 48122). -> false.
+
+
+
+
+
+
 % ------------------------------------------------
 % #9 (Undergrad/Grad) (15/5 pts)
 % Consult the 'zipcodes.pl' file, and study it.
@@ -171,6 +212,15 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % inton','Hudson','Akron','Fowler','Hartford','Niles','Warren','Du
 % ndee','Marysville','Ray','Franklin','Mason','Lowell','Newport',
 % 'Waterford', 'Sterling', 'Portage', 'Wayne', 'Grand Rapids', 'Weston']
+
+
+
+
+
+
+
+
+
 % ------------------------------------------------
 % #10 ( -- /Graduate) (0/10 pts)
 % * ** Only for Graduate Studetns **
