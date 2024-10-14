@@ -43,7 +43,6 @@ sum([H|T], SUM) :- sum(T, TailSum), SUM is H + TailSum.
 
 % max of one element is that element
 max([Num], Num).
-max([], []). % adding a case for empty list, since there is not a max for it
 max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX). 
 
 
@@ -65,7 +64,10 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % ** You can always assume that the given LST is not empty. 
 % partitionable(LST).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% if there is an answer, it is always the maximum number twice.
+% thus, find the max, find the total sum of the list minus the max (the sum of the rest of the numbers), and see if it is the max
+partitionable(LST) :- max(LST, Max), sum(LST, Sum), Rest is Max, Rest is Sum - Max.
+
  
 % partitionable([1, 2, 3, 4, 10]). -> true. because [10, 10]
 % partitionable([2, 1, 1]). -> true. because [2, 2]
