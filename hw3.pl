@@ -83,12 +83,10 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % list of integer numbers
 % elementExist(E, LST).
 
-% element does not exist in empty list
-elementExist(_, []) :- false.
-% If it is the head of the list, it exists. Acts as a base case
-elementExist(E, [E|_]).
-% If head is not the element, then check the tail
-elementExist(E, [_|T]) :- elementExist(E, T).
+
+elementExist(_, []) :- false.  % element for any input does not exist in empty list
+elementExist(E, [E|_]). % if it is the head of the list, it exists. rest of the elements (_) do not matter
+elementExist(E, [_|T]) :- elementExist(E, T). % if head is not the element, then check the rest
 
 
 
@@ -123,12 +121,8 @@ reverse([First|Rest], REVLST) :- reverse(Rest, RestRev), append(RestRev, [First]
 % collectOneDigits(LST, NEWLST). 
 
 collectOneDigits([], []). % empty list case returns empty list
-
-% if it actually is one digit
-collectOneDigits([First|Last], [First|Result]) :- First >= -9, First =< 9, collectOneDigits(Last, Result).  
-
-% if it is not one digit (same as above, but do not add head to result)
-collectOneDigits([First|Last], Result) :- (First < -9; First > 9), collectOneDigits(Last, Result).  
+collectOneDigits([First|Last], [First|Result]) :- First >= -9, First =< 9, collectOneDigits(Last, Result).  % if it actually is one digit
+collectOneDigits([First|Last], Result) :- (First < -9; First > 9), collectOneDigits(Last, Result).  % if it is not one digit (same as above, but do not add head to result)
 
 
 % collectOneDigits([10, 90, -20], NEWLST). -> NEWLST = []
@@ -144,11 +138,16 @@ collectOneDigits([First|Last], Result) :- (First < -9; First > 9), collectOneDig
 % #8 (Undergraduate/Graduate) (5/5 pts)
 % Consult the 'zipcodes.pl' file, and study it.
 % It contains facts about the US zipcodes.
-% location(Zipcode, Plcae, State, Location, Latitude, Longitude).
+% location(Zipcode, Place, State, Location, Latitude, Longitude).
 % Example: for getting all the Zipcodes and Sates you can do 
 %         location(Z, _, S, _, _, _). 
 % Determine all places based on given state and zipcode.
-% getStateInfo(PLACE, STATE< ZIPCODE).
+% getStateInfo(PLACE, STATE, ZIPCODE).
+
+
+:- consult('zipcodes.pl').  % consult zipcodes.pl here
+getStateInfo(Place, State, ZipCode) :- location(ZipCode, Place, State, _, _, _).
+
 
 
 % getStateInfo('Oxford', State, 45056). -> State = 'OH'
