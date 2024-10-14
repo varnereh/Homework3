@@ -105,11 +105,18 @@ elementExist(E, [_|T]) :- elementExist(E, T).
 % Determine the reverse list of integer numbers
 % reverse(LST, REVLST).
 
+reverse([], []). % reversed empty list is itself
+reverse([First|Rest], REVLST) :- reverse(Rest, RestRev), append(RestRev, [First], REVLST).
 
 % reverse([], REVLST). -> REVLST = []
 % reverse([1, 1, 1], REVLST). -> REVLST = [1, 1, 1]
 % reverse([4, 0, -4, 6], REVLST). -> REVLST = [6, -4, 0, 4]
 % reverse([47391], REVLST). -> REVLST = [47391]
+
+
+
+
+
 % ------------------------------------------------
 % #7 (Undergraduate/Graduate) (5/5 pts)
 % Determine the list of integer numbers that are only one digit numbers
