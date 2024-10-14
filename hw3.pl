@@ -122,6 +122,14 @@ reverse([First|Rest], REVLST) :- reverse(Rest, RestRev), append(RestRev, [First]
 % Determine the list of integer numbers that are only one digit numbers
 % collectOneDigits(LST, NEWLST). 
 
+collectOneDigits([], []). % empty list case returns empty list
+
+% if it actually is one digit
+collectOneDigits([First|Last], [First|Result]) :- First >= -9, First =< 9, collectOneDigits(Last, Result).  
+
+% if it is not one digit (same as above, but do not add head to result)
+collectOneDigits([First|Last], Result) :- (First < -9; First > 9), collectOneDigits(Last, Result).  
+
 
 % collectOneDigits([10, 90, -20], NEWLST). -> NEWLST = []
 % collectOneDigits([], NEWLST). -> NEWLST = []
