@@ -201,6 +201,19 @@ getStateInfo(Place, State, ZipCode) :- location(ZipCode, Place, State, _, _, _).
 % getCommon(STATE1, STATE2, PLACELST).
 
 
+:- use_module(library(lists)).  % ChatGPT taught me of this library, and in researching it, I was able to implement methods
+% from it to make this more concise. It also taught me of sort/2 and that it exists and removes duplicates. 
+% Links to my research: https://www.swi-prolog.org/pldoc/man?section=lists  -- for intersection()
+% https://www.swi-prolog.org/pldoc/man?predicate=findall/3  -- for findall()
+
+getCommon(State1, State2, PlaceList) :- findall(Place, location(_, Place, State1, _, _, _), List1), % get all places in State1
+                                        findall(Place, location(_, Place, State2, _, _, _), List2), % get all places in State2
+                                        sort(List1, Sorted1), % remove duplicates and sort list1
+                                        sort(List2, Sorted2), % remove duplicates and sort list2
+                                        intersection(Sorted1, Sorted2, PlaceList). % determine the common values between the sorted lists
+
+
+
 % getCommon('OH','MI',PLACELST). -> *Should be 131 unique plcase* 
 % ['Manchester','Unionville','Athens','Saint
 % Johns','Belmont','Bellaire','Bridgeport','Lansing','Flushing','D
