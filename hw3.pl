@@ -12,20 +12,22 @@ maxnums(A, B, B) :- A < B.
 % maxnums(-12, 12, MAX). -> MAX = 12
 % maxnums(11232, 92674, MAX). -> MAX = 92674
 % maxnums(1, 1, MAX). -> MAX = 1 
+
+
 % ------------------------------------------------
 % #2 (Undergraduate/Graduate) (5/5 pts)
 % Determine the summation of a list of integer numbers
 % sum(LST, SUM).
 sum([], 0).
-sum([H|T], SUM) :-
-    sum(T, TailSum),
-    SUM is H + TailSum.
+sum([H|T], SUM) :- sum(T, TailSum), SUM is H + TailSum.
 
 
 
 % sum([1, 2, 3, 4], SUM). -> SUM = 10
 % sum([10, -10], SUM). -> SUM = 0
 % sum([], SUM). -> SUM = 0
+
+
 % ------------------------------------------------
 % #3 (Undergraduate/Graduate) (5/5 pts)
 % Determine the Maximum of list of integer numbers
@@ -33,11 +35,17 @@ sum([H|T], SUM) :-
 %    as part of your solution.
 % ** You can always assume that the given LST is not empty. 
 % max(LST, MAX).
+max([Num], Num).
+max([], []). & adding a case for empty list, since there is not a max for it
+max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX). 
+
 
 
 % max([-5, -5, -5], MAX). -> MAX = -5
 % max([1], MAX). -> MAX = 1
 % max([413, 0, 977], MAX). -> MAX = 977
+
+
 % ------------------------------------------------
 % #4 (Undergraduate/Graduate) (5/5 pts)
 % Determine if a list of integer numbers can be split into two lists 
