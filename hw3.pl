@@ -13,9 +13,6 @@ maxnums(A, B, B) :- A < B.
 % maxnums(11232, 92674, MAX). -> MAX = 92674
 % maxnums(1, 1, MAX). -> MAX = 1 
 
-
-
-
 % ------------------------------------------------
 % #2 (Undergraduate/Graduate) (5/5 pts)
 % Determine the summation of a list of integer numbers
@@ -29,8 +26,6 @@ sum([H|T], SUM) :- sum(T, TailSum), SUM is H + TailSum.
 % sum([1, 2, 3, 4], SUM). -> SUM = 10
 % sum([10, -10], SUM). -> SUM = 0
 % sum([], SUM). -> SUM = 0
-
-
 
 
 % ------------------------------------------------
@@ -52,9 +47,6 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 % max([413, 0, 977], MAX). -> MAX = 977
 
 
-
-
-
 % ------------------------------------------------
 % #4 (Undergraduate/Graduate) (5/5 pts)
 % Determine if a list of integer numbers can be split into two lists 
@@ -66,6 +58,7 @@ max([Num|Rest], MAX) :- max(Rest, TailMax), maxnums(Num, TailMax, MAX).
 
 % if there is an answer, it is always the maximum number twice.
 % thus, find the max, find the total sum of the list minus the max (the sum of the rest of the numbers), and see if it is the max
+% ChatGPT-assisted idea of finding the total and subtracting the max
 partitionable(LST) :- max(LST, Max), sum(LST, Sum), Rest is Max, Rest is Sum - Max.
 
  
@@ -76,28 +69,19 @@ partitionable(LST) :- max(LST, Max), sum(LST, Sum), Rest is Max, Rest is Sum - M
 % partitionable([3, 2]). -> false.
 
 
-
-
-
 % ------------------------------------------------
 % #5 (Undergraduate/Graduate) (5/5 pts)
 % Determine whether the given integer number does exist in the given 
 % list of integer numbers
 % elementExist(E, LST).
 
-
 elementExist(_, []) :- false.  % element for any input does not exist in empty list
 elementExist(E, [E|_]). % if it is the head of the list, it exists. rest of the elements (_) do not matter
 elementExist(E, [_|T]) :- elementExist(E, T). % if head is not the element, then check the rest
 
-
-
 % elementExist(1, [1, 2, 3]). -> true.
 % elementExist(1, []). -> false.
 % elementExist(-10, [-34, -56, 2]). -> false.
-
-
-
 
 
 % ------------------------------------------------
@@ -112,9 +96,6 @@ reverse([First|Rest], REVLST) :- reverse(Rest, RestRev), append(RestRev, [First]
 % reverse([1, 1, 1], REVLST). -> REVLST = [1, 1, 1]
 % reverse([4, 0, -4, 6], REVLST). -> REVLST = [6, -4, 0, 4]
 % reverse([47391], REVLST). -> REVLST = [47391]
-
-
-
 
 
 % ------------------------------------------------
@@ -132,10 +113,6 @@ collectOneDigits([First|Last], Result) :- (First < -9; First > 9), collectOneDig
 % collectOneDigits([10, 90, -20, 5, -6], NEWLST). -> NEWLST = [5, -6]
 
 
-
-
-
-
 % ------------------------------------------------
 % #8 (Undergraduate/Graduate) (5/5 pts)
 % Consult the 'zipcodes.pl' file, and study it.
@@ -149,7 +126,6 @@ collectOneDigits([First|Last], Result) :- (First < -9; First > 9), collectOneDig
 
 :- consult('zipcodes.pl').  % consult zipcodes.pl here
 getStateInfo(Place, State, ZipCode) :- location(ZipCode, Place, State, _, _, _).
-
 
 
 % getStateInfo('Oxford', State, 45056). -> State = 'OH'
@@ -178,10 +154,6 @@ getStateInfo(Place, State, ZipCode) :- location(ZipCode, Place, State, _, _, _).
 % State = 'WI'
 % 
 % getStateInfo(_, 'OH', 48122). -> false.
-
-
-
-
 
 
 % ------------------------------------------------
@@ -241,13 +213,6 @@ getCommon(State1, State2, PlaceList) :- findall(Place, location(_, Place, State1
 % inton','Hudson','Akron','Fowler','Hartford','Niles','Warren','Du
 % ndee','Marysville','Ray','Franklin','Mason','Lowell','Newport',
 % 'Waterford', 'Sterling', 'Portage', 'Wayne', 'Grand Rapids', 'Weston']
-
-
-
-
-
-
-
 
 
 % ------------------------------------------------
