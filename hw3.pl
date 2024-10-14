@@ -16,6 +16,11 @@ maxnums(A, B, B) :- A < B.
 % #2 (Undergraduate/Graduate) (5/5 pts)
 % Determine the summation of a list of integer numbers
 % sum(LST, SUM).
+sum([], 0).
+sum([H|T], SUM) :-
+    sum(T, TailSum),
+    SUM is H + TailSum.
+
 
 
 % sum([1, 2, 3, 4], SUM). -> SUM = 10
